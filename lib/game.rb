@@ -21,10 +21,24 @@ class Game
   end
   
   def current_player
-    if Board.turn_count.even? 
-      return "X"
-    else 
-      return "O"
+     if board.turn_count.even? 
+       player_1 
+     else
+       player_2
+     end 
+   end
+
+  def won?
+  winning_combo = nil
+  WIN_COMBINATIONS.each do |combo|
+    position_1 = combo[0]
+    position_2 = combo[1]
+    position_3 = combo[2]
+  if @board.cells[position_1] == "X" && @board.cells[position_2] == "X" && @board.cells[position_3] == "X"
+    winning_combo = combo
+  elsif @board.cells[position_1] == "O" && @board.cells[position_2] == "O" && @board.cells[position_3] == "O"
     end
-  end 
+  end
+  false
+  end
 end
