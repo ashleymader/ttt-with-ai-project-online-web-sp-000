@@ -1,9 +1,8 @@
 module Players
   class Human < Player 
   
-  def move(position, player)
-    Board.[index] = current_player
-   return board
+  def move(board)
+    input = gets.strip
   end
   
   end
