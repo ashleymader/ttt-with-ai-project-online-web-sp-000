@@ -29,17 +29,28 @@ class Game
    end
 
   def won?
-  
   WIN_COMBINATIONS.each do |combo|
-    position_1 = combo[0]
-    position_2 = combo[1]
-    position_3 = combo[2]
-  if @board.cells[position_1] == "X" && @board.cells[position_2] == "X" && @board.cells[position_3] == "X"
-    winning_combo = combo
+    if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
     return combo
-  elsif @board.cells[position_1] == "O" && @board.cells[position_2] == "O" && @board.cells[position_3] == "O"
     end
   end
   false
   end
+
+
+  def draw? 
+    @board.full? && !won? 
+  end
+  
+  def over?
+    draw? || won? || @board.full?
+  end
+  
+  def winner 
+    if won?
+      combo = won? 
+      @board.cells[combo[0]]
+    end
+  end
+  
 end
