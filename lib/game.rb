@@ -29,12 +29,12 @@ class Game
    end
 
   def won?
-  WIN_COMBINATIONS.each do |combo|
-    if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
-    return combo
+    win_combo = WIN_COMBINATIONS.detect do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[1]] == board.cells[combo[2]] &&
+      board.cells[combo[2]] != " "
     end
-  end
-  false
+    win_combo == nil ? false : win_combo
   end
 
 
@@ -46,11 +46,17 @@ class Game
     draw? || won? || @board.full?
   end
   
-  def winner 
-    if won?
-      combo = won? 
-      @board.cells[combo[0]]
+  def winner
+    if self.won? != false
+      return board.cells[self.won?[0]]
+    else
+      nil
     end
+  end
+  
+  def turn 
+    if !board.valid_move?
+      puts "Selection not valid. Please select an open space."
   end
   
 end
